@@ -1,5 +1,5 @@
 [user]
-	email = 17216462+vaisya@users.noreply.github.com
+	email = 17216462+Natch@users.noreply.github.com
 	name = Satoru_Murata
 [color]
 	ui = auto
@@ -7,7 +7,6 @@
 	excludesfile = /Users/satoru/.gitignore_global
 [difftool "sourcetree"]
 	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
-	path = 
 [mergetool "sourcetree"]
 	cmd = /Applications/Sourcetree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
 	trustExitCode = true
@@ -18,3 +17,5 @@
 	clean = git-lfs clean -- %f
 	smudge = git-lfs smudge -- %f
 	process = git-lfs filter-process
+[alias]
+	push-f = push --force-with-lease
