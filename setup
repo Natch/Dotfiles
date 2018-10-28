@@ -1,14 +1,14 @@
 #!/bin/bash
 
-# If has error when script is running, make stop
+# If any errors occur during operation, this script stop running.
 set -e
 
 # Global constants
-DOT_DIRECTORY="${HOME}/dotfiles"
-DOT_TARBALL="https://github.com/ruwatana/dotfiles/tarball/master"
-REMOTE_URL="git@github.com:ruwatana/dotfiles.git"
+DOT_DIRECTORY="${HOME}/Dotfiles"
+DOT_TARBALL="https://github.com/Natch/Dotfiles/tarball/master"
+REMOTE_URL="git@github.com:Natch/Dotfiles.git"
 
-# Whether some command can use
+# Check the command exits and can be able to use it.
 has() {
   type "$1" > /dev/null 2>&1
 }
@@ -20,8 +20,9 @@ help() {
 Usage:
   $name [arguments] [command]
 Commands:
-  deploy: make symbolic links
-  initialize: install/update and deploy
+  deploy: Replace existing dotfiles to symbolic links
+   -f Force remove the dotfile if it's already there
+  initialize: Install/Update HomeBrew, then set up develop environment (e.g. anyenv)
 Arguments:
   -h Print help (this message)
 EOF
@@ -35,13 +36,13 @@ while getopts :f:h opt; do
       OVERWRITE=true
       ;;
     h)
-     help 
+     help
       ;;
   esac
 done
 shift $((OPTIND - 1))
 
-# Working only OS X.
+# Working only OS X(darwin*), otherwise exit 1.
 case ${OSTYPE} in
   darwin*)
     ;;
@@ -51,7 +52,7 @@ case ${OSTYPE} in
     ;;
 esac
 
-# If missing, download and extract the dotfiles repository
+# If DOT_DIRECTORY is missing, clone and extract the dotfiles from repository.
 if [ ! -d ${DOT_DIRECTORY} ]; then
   echo "Downloading dotfiles..."
   mkdir ${DOT_DIRECTORY}
@@ -69,11 +70,11 @@ fi
 
 cd ${DOT_DIRECTORY}
 
-# Deployment
+# Deployment (Replace existing dotfiles to symbolic links)
 deploy() {
   for f in .??*
+    # Force remove the dotfile if it's already there
   do
-    # Force remove the vim directory if it's already there
     [ -n "${OVERWRITE}" -a -e ${HOME}/${f} ] && rm -f ${HOME}/${f}
     if [ ! -e ${HOME}/${f} ]; then
       # If you have ignore files, add file/directory name here
@@ -86,7 +87,7 @@ deploy() {
   echo $(tput setaf 2)Deploy dotfiles complete!. ✔︎$(tput sgr0)
 }
 
-# Brew
+# Install / Update HomeBrew, then install fomulaes and casks.
 run_brew() {
   # Install brew
   if has "brew"; then
@@ -105,19 +106,12 @@ run_brew() {
 
     # brew tap
     brew tap 'caskroom/cask' # Homebrew Cask
-    brew tap 'sanemat/font' # For install ricty
 
-    # Install each package if needed by brew
+    # Install usual packages using brew command.
     local list_formulae
     local -a missing_formulae
     local -a desired_formulae=(
-      'carthage'
-      'ffmpeg'
       'git'
-      'imagemagick'
-      'openssl'
-      'ricty --powerline --vim-powerline'
-      'tmux'
       'tree'
       'wget'
       'zsh'
@@ -132,7 +126,6 @@ run_brew() {
         missing_formulae=("${missing_formulae[@]}" "${desired_formulae[$index]}")
       else
         echo "Installed ${formula}"
-        [[ "${formula}" = "ricty" ]] && local installed_ricty=true
       fi
     done
 
@@ -145,30 +138,20 @@ run_brew() {
       [[ $? ]] && echo "$(tput setaf 2)Installed missing formulae ✔︎$(tput sgr0)"
     fi
 
-    # Install ricty
-    if [ -z "${installed_ricty}"  ]; then
-      echo "Reload fonts. This could take a while..."
-      local cellar=`brew --config | grep 'HOMEBREW_CELLAR' | cut -d' ' -f 2`
-      find ${cellar}/ricty/*/share/fonts/Ricty*.ttf | xargs -I % cp % ~/Library/Fonts
-      fc-cache -vf
-    fi
-
     # Install each application if needed by brew cask
     local -a missing_formulae=()
     local -a desired_formulae=(
-      'abstract'
       'alfred'
       'atom'
       'bettertouchtool'
       'charles'
-      'cyberduck'
-      'google-chrome'
       'iterm2'
       'slack'
-      'sketch'
       'skitch'
+      'cakebrew'
+      'sourcetree'
       'visual-studio-code'
-      'zeplin'
+      'teamsql'
     )
 
     local installed=`brew cask list`
@@ -190,7 +173,7 @@ run_brew() {
       [[ $? ]] && echo "$(tput setaf 2)Installed missing formulae ✔︎$(tput sgr0)"
     fi
 
-    # Cleanup brew
+    # Cleanup accumulate old versions of a fomula.
     echo "Cleanup Homebrew..."
     brew cleanup
 
@@ -202,11 +185,11 @@ run_brew() {
 run_anyenv() {
   if [ ! -d ${HOME}/.anyenv ]; then
     echo "Downloading anyenv..."
-    
-    git clone https://github.com/riywo/anyenv ~/.anyenv 
-    
+
+    git clone https://github.com/riywo/anyenv ~/.anyenv
+
     echo "$(tput setaf 2)Download anyenv ✔︎$(tput sgr0)"
-    
+
     if has "anyenv"; then
       echo "Installing anyenv..."
       anyenv install rbenv
@@ -214,7 +197,7 @@ run_anyenv() {
       anyenv install phpenv
       anyenv install ndenv
       exec $SHELL -l
-    
+
       echo "$(tput setaf 2)Installed anyenv ✔︎$(tput sgr0)"
 
     else
@@ -232,14 +215,14 @@ run_anyenv() {
       echo "Installing pyenv install ${latest3x}"
       pyenv install ${latest3x}
       pyenv global ${latest3x}
-    else  
+    else
       echo "Already pyenv global version is ${latest3x}"
       pyenv global ${latest3x}
     fi
 
     if has 'pip'; then
       pip install --upgrade pip
-      pip install --user powerline-status
+      pip install powerline-status
       echo "$(tput setaf 2)powerline-status install completed. ✔︎$(tput sgr0)"
     else
       echo "$(tput setaf 1)pip not installed.$(tput sgr0)"
@@ -259,12 +242,9 @@ initialize() {
   [ ! -d ${HOME}/.zplug ] && curl -sL --proto-redir -all,https https://raw.githubusercontent.com/zplug/installer/master/installer.zsh| zsh
 
   # Change shell to zsh
-  [ ${SHELL} != "/bin/zsh"  ] && chsh -s /bin/zsh
+  # [ ${SHELL} != "/bin/zsh"  ] && chsh -s /bin/zsh
 
-  # Install tpm (tmux plugin manager)
-  [ ! -d ${HOME}/.tmux/plugins/tpm ] && git clone https://github.com/tmux-plugins/tpm ${HOME}/.tmux/plugins/tpm
-
-  # Install dein.vim
+  # Install dein.vim (vim plugin manager)
   if [ ! -d ${HOME}/.vim/repos/github.com/Shougo/dein.vim ]; then
     curl https://raw.githubusercontent.com/Shougo/dein.vim/master/bin/installer.sh > installer.sh
     sh ./installer.sh ~/.vim
@@ -290,7 +270,7 @@ case $command in
     initialize
     ;;
   *)
-    help 
+    help
     ;;
 esac
 
