@@ -19,3 +19,5 @@
 	process = git-lfs filter-process
 [alias]
 	push-f = push --force-with-lease
+[pull]
+	rebase = true
