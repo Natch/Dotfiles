@@ -30,13 +30,10 @@ EOF
 }
 
 # Argument options
-while getopts :f:h opt; do
+while getopts :h opt; do
   case ${opt} in
-    f)
-      OVERWRITE=true
-      ;;
     h)
-     help
+      help
       ;;
   esac
 done
@@ -73,14 +70,15 @@ cd ${DOT_DIRECTORY}
 # Deployment (Replace existing dotfiles to symbolic links)
 deploy() {
   for f in .??*
-    # Force remove the dotfile if it's already there
-  do
+  do # Force remove the dotfile if it's already there
     [ -n "${OVERWRITE}" -a -e ${HOME}/${f} ] && rm -f ${HOME}/${f}
     if [ ! -e ${HOME}/${f} ]; then
       # If you have ignore files, add file/directory name here
       [[ ${f} = ".git" ]] && continue
       [[ ${f} = ".gitignore" ]] && continue
       ln -snfv ${DOT_DIRECTORY}/${f} ${HOME}/${f}
+    else
+      echo "$(tput setaf 1)${f} has already been in HOME Directory.$(tput sgr0)"
     fi
   done
 
@@ -260,10 +258,15 @@ initialize() {
 }
 
 command=$1
+option=$2
+
 [ $# -gt 0 ] && shift
 
 case $command in
   deploy)
+    if [ -n "${option}" -a "${option}" = "-f" ]; then
+      OVERWRITE=true
+    fi
     deploy
     ;;
   init*)
@@ -275,4 +278,3 @@ case $command in
 esac
 
 exit 0
-
