@@ -148,6 +148,7 @@ run_brew() {
       'skitch'
       'cakebrew'
       'sourcetree'
+      'fork'
       'visual-studio-code'
       'teamsql'
     )
