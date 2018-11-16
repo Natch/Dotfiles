@@ -25,7 +25,7 @@ GIT_PS1_SHOWSTASHSTATE=1
 # ------------------------------------------------------------------------
 #  Bash Prompt-Format Setting
 # ------------------------------------------------------------------------
-export PS1='\[\e[1;37m\]\u\[\e[m\]:\[\e[1;33m\]\w\[\e[1;31m\]$(__git_ps1)\[\e[m\] \$ '
+export PS1='\[\e[3;38;5;14m\]\u\[\e[m\]:\[\e[1;33m\]\w\[\e[1;31m\]$(__git_ps1)\[\e[m\] \$ '
 
 # \u ユーザ名
 # \h ホスト名
@@ -38,6 +38,7 @@ export PS1='\[\e[1;37m\]\u\[\e[m\]:\[\e[1;33m\]\w\[\e[1;31m\]$(__git_ps1)\[\e[m\
 # \$ $
 
 # 1; -> Bold Font
+# 3; -> Italic Font
 # code 30 -> black
 # code 31 -> red
 # code 32 -> green
@@ -46,6 +47,7 @@ export PS1='\[\e[1;37m\]\u\[\e[m\]:\[\e[1;33m\]\w\[\e[1;31m\]$(__git_ps1)\[\e[m\
 # code 35 -> purple
 # code 36 -> cyan
 # code 37 -> white
+# code 38 -> 拡張文字色指定 5;x;??? (0-255の10進数指定)
 # \[e[m\] -> reset next font color
 
 
