@@ -70,7 +70,9 @@ cd ${DOT_DIRECTORY}
 # Deployment (Replace existing dotfiles to symbolic links)
 deploy() {
   for f in .??*
-  do # Force remove the dotfile if it's already there
+  do
+    # If "-f" option is added,
+    # Force remove the dotfile although it's already there.
     [ -n "${OVERWRITE}" -a -e ${HOME}/${f} ] && rm -f ${HOME}/${f}
     if [ ! -e ${HOME}/${f} ]; then
       # If you have ignore files, add file/directory name here
