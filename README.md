@@ -15,6 +15,7 @@ $ git clone git@github.com:Natch/Dotfiles.git
 ```
 
 ## Do setup with argument 'deploy' for replacing existing dotfiles to symbolic links
+Move target dotfiles to git management directory for dotfiles (e.g. ~/Dotfiles/) before.
 ```bash
 $ ./setup deploy
 ```
