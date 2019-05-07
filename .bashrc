@@ -59,6 +59,9 @@ export PS1='\[\e[3;38;5;14m\]\u\[\e[m\]:\[\e[1;33m\]\w\[\e[1;31m\]$(__git_ps1)\[
 # ------------------------------------------------------------------------
 alias ls='ls -FG'
 alias ll='ls -alFG'
+alias be='bundle exec'
+alias rs='bin/rails server'
+alias rc='bin/rails console'
 
 # change ls -G command colors (Directory : blue[x:default] -> bold yellow[D])
 if [ "$(uname)" = 'Darwin' ]; then
