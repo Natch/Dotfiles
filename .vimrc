@@ -4,8 +4,13 @@ set fenc=utf-8
 " 行番号を表示
 set number
 
+" カラースキーマ
+" ~/.vim/colors/spring-night.vim
+colorscheme spring-night
+
 " シンタックスハイライト
-syntax enable
+:set term=xterm-256color
+:syntax on
 
 " 現在の行を強調表示
 set cursorline
@@ -31,3 +36,5 @@ set smartindent
 " Alias : ESC -> jj
 inoremap <silent> jj <ESC>
 
+" 検索をハイライト
+:set hlsearch
