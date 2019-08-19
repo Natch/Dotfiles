@@ -115,6 +115,7 @@ run_brew() {
       'tree'
       'wget'
       'zsh'
+      'jq'
     )
 
     local installed=`brew list`
