@@ -15,5 +15,6 @@
 [alias]
 	push-f = push --force-with-lease
 	co = checkout
+  s = status
 [pull]
 	rebase = true
