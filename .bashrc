@@ -62,6 +62,7 @@ alias ll='ls -alFG'
 alias be='bundle exec'
 alias rs='bin/rails server'
 alias rc='bin/rails console'
+alias dc='docker-compose'
 
 # change ls -G command colors (Directory : blue[x:default] -> bold yellow[D])
 if [ "$(uname)" = 'Darwin' ]; then
