@@ -112,10 +112,16 @@ run_brew() {
     local -a missing_formulae
     local -a desired_formulae=(
       'git'
+      'hh'
       'tree'
       'wget'
       'zsh'
+      'zlib'
+      'graphviz'
       'jq'
+      'awscli'
+      'ebcli'
+      'circleci'
     )
 
     local installed=`brew list`
@@ -143,17 +149,20 @@ run_brew() {
     local -a missing_formulae=()
     local -a desired_formulae=(
       'alfred'
-      'atom'
       'bettertouchtool'
       'charles'
       'iterm2'
       'slack'
       'skitch'
       'cakebrew'
-      'sourcetree'
       'fork'
       'visual-studio-code'
-      'teamsql'
+      'sequel-pro'
+      'keyboardcleantool'
+      'dash'
+      'dozer'
+      'spactacle'
+      'docker'
     )
 
     local installed=`brew cask list`
