@@ -16,5 +16,6 @@
 	push-f = push --force-with-lease
 	co = checkout
   s = status
+	cm = commit
 [pull]
 	rebase = true
