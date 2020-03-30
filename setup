@@ -163,6 +163,7 @@ run_brew() {
       'dozer'
       'spactacle'
       'docker'
+      'postman'
     )
 
     local installed=`brew cask list`
