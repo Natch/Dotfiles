@@ -3,7 +3,8 @@ if [ -f ~/.bashrc ]; then
 fi
 
 # ------------------------------------------------------------------------
-#  anyenv PATH Setting
+#  anyenv PATH Setting, only if clone from repository directly.
+#  https://github.com/anyenv/anyenv
 # ------------------------------------------------------------------------
 export PATH="$HOME/.anyenv/bin:$PATH"
 eval "$(anyenv init -)"
