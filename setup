@@ -111,17 +111,23 @@ run_brew() {
     local list_formulae
     local -a missing_formulae
     local -a desired_formulae=(
+      'anyenv'
+      'aws-elasticbeanstalk'
+      'awscli'
+      'circleci'
       'git'
-      'hh'
+      'graphviz'
+      'hstr'
+      'jq'
+      'mysql@5.7'
+      'redis'
+      'tfenv'
+      'tflint'
+      'the_silver_searcher'
       'tree'
       'wget'
+      'yarn'
       'zsh'
-      'zlib'
-      'graphviz'
-      'jq'
-      'awscli'
-      'ebcli'
-      'circleci'
     )
 
     local installed=`brew list`
@@ -150,20 +156,21 @@ run_brew() {
     local -a desired_formulae=(
       'alfred'
       'bettertouchtool'
-      'charles'
-      'iterm2'
-      'slack'
-      'skitch'
       'cakebrew'
-      'fork'
-      'visual-studio-code'
-      'sequel-pro'
-      'keyboardcleantool'
+      'chromedriver'
       'dash'
-      'dozer'
-      'spactacle'
       'docker'
+      'dozer'
+      'fork'
+      'iterm2'
+      'keyboardcleantool'
+      'ngrok'
       'postman'
+      'sequel-pro'
+      'skitch'
+      'spectacle'
+      'tableplus'
+      'visual-studio-code'
     )
 
     local installed=`brew cask list`
