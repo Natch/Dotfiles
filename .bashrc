@@ -25,9 +25,20 @@ GIT_PS1_SHOWSTASHSTATE=1
 #  Bash Prompt-Format Setting
 # ------------------------------------------------------------------------
 
-# Tab title
-export PROMPT_COMMAND='echo -ne "\033];${PWD##*/}\007"'
-# prompt disp
+# ターミナルのタブタイトルをカレントディレクトリで表示する
+export PROMPT_COMMAND='echo -ne "\033]0;${PWD##*/}\007"'
+
+# ターミナルへの標準出力後に改行を入れる
+function add_line {
+  if [[ -z "${PS1_NEWLINE_LOGIN}" ]]; then
+    PS1_NEWLINE_LOGIN=true
+  else
+    printf '\n'
+  fi
+}
+export PROMPT_COMMAND="add_line; ${PROMPT_COMMAND}"
+
+# プロンプトの表示設定
 export PS1='\[\e[3;38;5;14m\]\u\[\e[m\]:\[\e[1;33m\]\w\[\e[1;31m\]$(__git_ps1)\[\e[m\]\n\$ '
 
 # \u ユーザ名
