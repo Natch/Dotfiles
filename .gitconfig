@@ -1,21 +1,25 @@
 [user]
-	email = 17216462+Natch@users.noreply.github.com
-	name = Satoru
+  email = 17216462+Natch@users.noreply.github.com
+  name = Satoru
+
 [color]
-	ui = auto
+  i = auto
+
 [core]
-	excludesfile = /Users/satoru/.gitignore_global
+  excludesfile = /Users/satoru/.gitignore_global
+
 [commit]
-	template = /Users/satoru/Git/git-config/.commit_template
-[filter "lfs"]
-	required = true
-	clean = git-lfs clean -- %f
-	smudge = git-lfs smudge -- %f
-	process = git-lfs filter-process
+  template = /Users/satoru/Git/git-config/.commit_template
+
 [alias]
-	push-f = push --force-with-lease
-	co = checkout
+  push-f = push --force-with-lease
+  co = checkout
+  gp = "git pull origin $(git rev-parse --abbrev-ref HEAD)"
+  b = branch
+  dmbr = "!f () { git checkout $1; git branch --merged|egrep -v '\\*|develop|master'|xargs git branch -d; };f"
+  cm = commit
   s = status
-	cm = commit
+  graph = log --graph --all --oneline
+
 [pull]
-	rebase = true
+  rebase = true
