@@ -28,7 +28,7 @@ GIT_PS1_SHOWSTASHSTATE=1
 # Tab title
 export PROMPT_COMMAND='echo -ne "\033];${PWD##*/}\007"'
 # prompt disp
-export PS1='\[\e[3;38;5;14m\]\u\[\e[m\]:\[\e[1;33m\]\w\[\e[1;31m\]$(__git_ps1)\[\e[m\] \$ '
+export PS1='\[\e[3;38;5;14m\]\u\[\e[m\]:\[\e[1;33m\]\w\[\e[1;31m\]$(__git_ps1)\[\e[m\]\n\$ '
 
 # \u ユーザ名
 # \h ホスト名
