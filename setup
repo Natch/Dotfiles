@@ -172,6 +172,7 @@ run_brew() {
       'tableplus'
       'visual-studio-code'
       'graphiql'
+      'ngrok'
     )
 
     local installed=`brew cask list`
