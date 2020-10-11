@@ -19,3 +19,8 @@ export PATH="$HOME/.whichpr/bin:$PATH"
 #  MySQL PATH Setting (not docker)
 # ------------------------------------------------------------------------
 export PATH="/usr/local/opt/mysql@5.7/bin:$PATH"
+
+# ------------------------------------------------------------------------
+#  PostgreSQL PATH Setting (not docker)
+# ------------------------------------------------------------------------
+export PATH="/usr/local/Cellar/postgresql/12.3_4/bin:$PATH"
