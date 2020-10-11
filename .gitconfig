@@ -13,8 +13,9 @@
 
 [alias]
   push-f = push --force-with-lease
+  pl = !git pull origin `git rev-parse --abbrev-ref HEAD`
+  ps = !git push origin `git rev-parse --abbrev-ref HEAD`
   co = checkout
-  gp = "git pull origin $(git rev-parse --abbrev-ref HEAD)"
   b = branch
   dmbr = "!f () { git checkout $1; git branch --merged|egrep -v '\\*|develop|master'|xargs git branch -d; };f"
   cm = commit
