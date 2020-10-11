@@ -171,6 +171,7 @@ run_brew() {
       'spectacle'
       'tableplus'
       'visual-studio-code'
+      'graphiql'
     )
 
     local installed=`brew cask list`
