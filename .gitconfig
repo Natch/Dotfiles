@@ -21,6 +21,9 @@
   cm = commit
   s = status
   graph = log --graph --all --oneline
+  diffd = diff develop..HEAD
+  diffdstat = diff develop..HEAD --stat
+  diffdzebra = diff develop..HEAD --color-moved=dimmed_zebra
 
 [pull]
   rebase = true
