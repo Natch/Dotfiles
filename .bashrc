@@ -117,3 +117,9 @@ if [[ $- =~ .*i.* ]]; then bind '"\C-xk": "\C-a hstr -k \C-j"'; fi
 if type terraform &> /dev/null; then
     complete -C terraform terraform
 fi
+
+# ------------------------------------------------------------------------
+#  追加済みの Keychain からssh秘密鍵を読み込む
+#  https://qiita.com/sonots/items/a6dec06f95fca4757d4a
+# ------------------------------------------------------------------------
+ssh-add -A
