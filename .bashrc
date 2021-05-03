@@ -29,7 +29,7 @@ GIT_PS1_SHOWSTASHSTATE=1
 export PROMPT_COMMAND='echo -ne "\033]0;${PWD##*/}\007"'
 
 # ターミナルへの標準出力後に改行を入れる
-function add_line {
+function add_line() {
   if [[ -z "${PS1_NEWLINE_LOGIN}" ]]; then
     PS1_NEWLINE_LOGIN=true
   else
@@ -87,19 +87,19 @@ fi
 
 # change ls -G command colors (Directory : blue[x:default] -> bold yellow[D])
 if [ "$(uname)" = 'Darwin' ]; then
-    export LSCOLORS=Dxfxcxdxbxegedabagacad
+  export LSCOLORS=Dxfxcxdxbxegedabagacad
 fi
 
 # ------------------------------------------------------------------------
 #  HSTR configuration - add this to ~/.bashrc
 #  (https://github.com/dvorka/hstr)
 # ------------------------------------------------------------------------
-alias hh=hstr                    # hh to be alias for hstr
-export HSTR_CONFIG=hicolor       # get more colors
-shopt -s histappend              # append new history items to .bash_history
-export HISTCONTROL=ignorespace   # leading space hides commands from history
-export HISTFILESIZE=10000        # increase history file size (default is 500)
-export HISTSIZE=${HISTFILESIZE}  # increase history size (default is 500)
+alias hh=hstr                   # hh to be alias for hstr
+export HSTR_CONFIG=hicolor      # get more colors
+shopt -s histappend             # append new history items to .bash_history
+export HISTCONTROL=ignorespace  # leading space hides commands from history
+export HISTFILESIZE=10000       # increase history file size (default is 500)
+export HISTSIZE=${HISTFILESIZE} # increase history size (default is 500)
 
 # ensure synchronization between Bash memory and history file
 export PROMPT_COMMAND="history -a; history -n; ${PROMPT_COMMAND}"
@@ -114,8 +114,8 @@ if [[ $- =~ .*i.* ]]; then bind '"\C-xk": "\C-a hstr -k \C-j"'; fi
 #  Terraform tab completion automatically
 #  https://medium.com/@jyotti/terraform-completion-bc1acb6b881e
 # ------------------------------------------------------------------------
-if type terraform &> /dev/null; then
-    complete -C terraform terraform
+if type terraform &>/dev/null; then
+  complete -C terraform terraform
 fi
 
 # ------------------------------------------------------------------------
