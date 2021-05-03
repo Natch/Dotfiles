@@ -78,6 +78,13 @@ alias drc='docker-compose exec web bin/rails console'
 alias dc='docker-compose'
 alias dcr='docker-compose restart'
 
+# auto using colordiff
+if [[ -x $(which colordiff) ]]; then
+  alias diff='colordiff -u'
+else
+  alias diff='diff -u'
+fi
+
 # change ls -G command colors (Directory : blue[x:default] -> bold yellow[D])
 if [ "$(uname)" = 'Darwin' ]; then
     export LSCOLORS=Dxfxcxdxbxegedabagacad
